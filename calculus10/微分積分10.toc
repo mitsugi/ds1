@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{講義概要}{2}{0}{1}
+\beamer@sectionintoc {2}{二変数関数}{3}{0}{2}
+\beamer@sectionintoc {3}{二変数関数}{4}{0}{3}
+\beamer@sectionintoc {4}{極限}{5}{0}{4}
+\beamer@sectionintoc {5}{偏微分}{12}{0}{5}
+\beamer@sectionintoc {6}{今日のまとめ}{30}{0}{6}
