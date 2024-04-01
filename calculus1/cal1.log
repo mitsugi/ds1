@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.sjis) (TeX Live 2022) (preloaded format=platex 2022.10.1)  31 MAR 2024 20:16
+This is e-pTeX, Version 3.141592653-p4.0.0-220214-2.6 (utf8.sjis) (TeX Live 2022) (preloaded format=platex 2022.10.1)  31 MAR 2024 22:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -857,7 +857,7 @@ File: l3backend-dvipdfmx.def 2022-09-28 L3 backend support: dvipdfmx
 \g__pdf_backend_annotation_int=\count354
 \g__pdf_backend_link_int=\count355
 )
-No file cal1.aux.
+(./cal1.aux)
 \openout1 = `cal1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
@@ -882,6 +882,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 68.
 LaTeX Font Info:    ... okay on input line 68.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 68.
 LaTeX Font Info:    ... okay on input line 68.
+
 *geometry* detected driver: dvipdfm
 *geometry* verbose mode - [ preamble ] result:
 * driver: dvipdfm
@@ -916,11 +917,9 @@ LaTeX Font Info:    ... okay on input line 68.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring OFF on input line 68.
+(./cal1.out) (./cal1.out)
 \@outlinefile=\write6
 \openout6 = `cal1.out'.
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 
 (c:/texlive/2022/texmf-dist/tex/latex/translator/translator-basic-dictionary-En
@@ -959,8 +958,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 68.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 Package xypdf Info: Line width: 0.43799pt on input line 68.
-
-No file cal1.nav.
+ (./cal1.nav)
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
 (hyperref)                setting the option has no effect on input line 70.
@@ -1135,25 +1133,16 @@ Missing character: There is no 4 in font nullfont!
 \openout9 = `cal1.snm'.
 
  (./cal1.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `cal1.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `cal1.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  0D4E219794D81D1FE8AA5AFF88DF2F6F;248.
+Package rerunfilecheck Info: File `cal1.out' has not changed.
+(rerunfilecheck)             Checksum: 0D4E219794D81D1FE8AA5AFF88DF2F6F;248.
  ) 
 Here is how much of TeX's memory you used:
- 24666 strings out of 475530
- 468604 string characters out of 5794171
- 829205 words of memory out of 5000000
- 45745 multiletter control sequences out of 15000+600000
+ 24755 strings out of 475530
+ 469309 string characters out of 5794171
+ 830895 words of memory out of 5000000
+ 45826 multiletter control sequences out of 15000+600000
  486603 words of font info for 102 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
  128i,18n,122p,3233b,1028s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on cal1.dvi (30 pages, 261808 bytes).
+Output written on cal1.dvi (30 pages, 262496 bytes).

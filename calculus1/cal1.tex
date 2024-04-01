@@ -1,95 +1,4 @@
-\documentclass[dvipdfmx,cjk,10.2pt]{beamer} 
-%\documentclass[dvipdfm,cjk]{beamer} %% オプションは環境や利用するプログラムに
-%\documentclass[dvips,cjk]{beamer}   %% よって変える
-
-\usepackage{subfigure}
-\usepackage[all]{xy}
-\usepackage{wrapfig}
-
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\D}{\mathbb{D}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-
-\newcommand{\Imag}{\mathrm{Im}}
-\newcommand{\id}{\mathrm{id}}
-
-
-\makeatletter
-\newcommand\xleftrightarrow[2][]{%
-  \ext@arrow 9999{\longleftrightarrowfill@}{#1}{#2}}
-\newcommand\longleftrightarrowfill@{%
-  \arrowfill@\leftarrow\relbar\rightarrow}
-\makeatother
-
-\AtBeginDvi{\special{pdf:tounicode 90ms-RKSJ-UCS2}} %% しおりが文字化けしないように
-%\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
-
-\setbeamertemplate{navigation symbols}{} %% 右下のアイコンを消す
-\setbeamertemplate{theorems}[normal font] %%斜体を直す
-
-\usetheme{CambridgeUS}         %% theme の選択
-%\usetheme{Boadilla}           %% Beamer のディレクトリの中の
-%\usetheme{Madrid}             %% beamerthemeCambridgeUS.sty を指定
-%\usetheme{Antibes}            %% 色々と試してみるといいだろう
-%\usetheme{Montpellier}        %% サンプルが beamer\doc に色々とある。
-%\usetheme{Berkeley}
-%\usetheme{Goettingen}
-%\usetheme{Singapore}
-%\usetheme{Szeged}
-
-%\usecolortheme{rose}          %% colortheme を選ぶと色使いが変わる
-%\usecolortheme{albatross}
-
-%\useoutertheme{shadow}                 %% 箱に影をつける
-\usefonttheme{professionalfonts}       %% 数式の文字を通常の LaTeX と同じにする
-
-%\setbeamercovered{transparent}         %% 消えている文字をうっすらと表示する
-
-
-\theoremstyle{definition}
-\setbeamertemplate{theorems}[numbered]  %% 定理に番号をつける
-\newtheorem{Thm}{定理}[section]
-%\theoremstyle{example}
-\newtheorem{Ex}[Thm]{例}
-%\newtheorem{exam}[thm]{Example}
-\newtheorem{Rem}[Thm]{注意}
-\newtheorem{Conj}[Thm]{予想}
-\newtheorem{Def}[Thm]{定義}
-\newtheorem{Prob}[Thm]{問題}
-
-\setbeamercolor{block title}{fg=blue!70!black, bg=blue!15!white} 
-\setbeamercolor{block body}{fg=black, bg=blue!10!white}
-
-
-
-\begin{document}
-\title{微分・積分 第1回} 
-\author{慶応義塾大学}            %% ここに書かれた情報は色々なところに使われるので
-\institute[]{総合政策学部・環境情報学部}   %% なるべく設定した方が良い
-\date{}
-
-
-
-\begin{frame}                  %% \begin{frame}..\end{frame} で 1 枚のスライド
-\titlepage                     %% タイトルページ
-\end{frame}
-
-%\begin{frame}                  %% 目次 (必要なければ省略)
-%\tableofcontents
-%\end{frame}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+\graphicspath{calculus1}
 \section{講義概要}
 
 \begin{frame}
@@ -181,7 +90,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{diff_int.png}
+  \includegraphics[width=100mm]{calculus1/diff_int.png}
  \end{center}
 \end{figure}
 
@@ -199,7 +108,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{diff.png}
+  \includegraphics[width=100mm]{calculus1/diff.png}
  \end{center}
 \end{figure}
 
@@ -230,7 +139,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{LecArea.png}
+  \includegraphics[width=100mm]{calculus1/LecArea.png}
  \end{center}
 \end{figure}
 
@@ -248,7 +157,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=60mm]{int_speed.png}
+  \includegraphics[width=60mm]{calculus1/int_speed.png}
  \end{center}
 \end{figure}
 
@@ -273,7 +182,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{diff_pos=speed.png}
+  \includegraphics[width=100mm]{calculus1/diff_pos=speed.png}
  \end{center}
 \end{figure}
 
@@ -300,7 +209,7 @@
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{diff_int2.png}
+  \includegraphics[width=100mm]{calculus1/diff_int2.png}
  \end{center}
 \end{figure}
 
@@ -465,7 +374,7 @@ $$
 2つの黒丸に挟まれた区間が閉空間, 2つの白丸に挟まれた区間が開空間: 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=80mm]{interval.png}
+  \includegraphics[width=80mm]{calculus1/interval.png}
  \end{center}
 \end{figure}
 
@@ -610,7 +519,7 @@ $A \subset B$でないとき, $A \not\subset B$と書く.
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=100mm]{subsets.png}
+  \includegraphics[width=100mm]{calculus1/subsets.png}
  \end{center}
 \end{figure}
 
@@ -678,7 +587,7 @@ $$
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=50mm]{map.png}
+  \includegraphics[width=50mm]{calculus1/map.png}
  \end{center}
 \end{figure}
 
@@ -703,7 +612,7 @@ $$
 \item $g:\{\text{犬}\} \longrightarrow \R, \ \ \ A \mapsto \text{$A$の身長}$
 \item $h:\{\text{猫}\} \longrightarrow \{\text{猫}\}, \ \ \ A \mapsto \text{$A$の母猫}$
 \item $i:\{\text{日本の大学}\} \longrightarrow \N, \ \ \ \text{$A$大学} \mapsto \text{$A$大学の学生数}$
-\item $j:\{\text{日本の大学}\} \longrightarrow \{\text{都道府県}\}, \ \ \ \text{$A$大学} \mapsto \text{$A$大学の所在地}$
+\item $j:\{\text{日本の大学}\} \longrightarrow \{\text{都道府県}\}, \ \ \ \text{$A$大学} \mapsto \text{$A$大学本部の所在地}$
 \end{enumerate}
 一方で, 人間$A$と$A$の友人の対応は写像ではない. 
 $A$の友人が1人とは限らないからである. 
@@ -734,7 +643,7 @@ $$
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=50mm]{imf.png}
+  \includegraphics[width=50mm]{calculus1/imf.png}
  \end{center}
 \end{figure}
 
@@ -898,7 +807,7 @@ $$
 
  \begin{figure}[htbp]
  \begin{center} 
-  \includegraphics[width=25mm]{inverse.png}
+  \includegraphics[width=25mm]{calculus1/inverse.png}
  \end{center}
 \end{figure}
 
@@ -975,6 +884,3 @@ $f(x)=2x-4$の逆写像は, 方程式$y=2x-4$を$x$に関して解くことで�
 
 
 \end{frame}
-
-
-\end{document}
