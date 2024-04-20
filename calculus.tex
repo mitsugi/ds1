@@ -6,7 +6,30 @@
 \usepackage[all]{xy}
 \usepackage{wrapfig}
 \usepackage{tikz}
-
+\usepackage{graphicx}  
+\usepackage{times}
+\usepackage[most]{tcolorbox}
+\usepackage{ascmac}
+\usepackage{amsmath}
+\usepackage{fancybox} 
+\usepackage{version}
+\usepackage{mdframed}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{cancel}
+%\usepackage{chapterbib}
+\usepackage{tboxit}
+\usepackage{boxedminipage}
+\usepackage{rdbkbox}
+\usepackage{bm}
+\usepackage{xcolor}
+\usepackage{cancel}
+%\usepackage{chapterbib}
+\usepackage{tboxit}
+\usepackage{boxedminipage}
+\usepackage{rdbkbox}
+\usepackage{bm}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\R}{\mathbb{R}}
@@ -84,18 +107,34 @@
 \newtheorem{Conj}[Thm]{予想}
 \newtheorem{Def}[Thm]{定義}
 \newtheorem{Prob}[Thm]{問題}
+\usepackage[normalem]{ulem}
+\newtheorem{prog}{program}[section]
+\newenvironment{program}
+{
+  \VerbatimEnvironment
+  \baselineskip=.40\normalbaselineskip
+  \begin{Verbatim}
+}
+{
+  \end{Verbatim}
+  \baselineskip=\normalbaselineskip
+  \noindent
+}
+\newenvironment{slide}[1]
+{\begin{frame}\frametitle{#1}}{\end{frame}}
 
 \setbeamercolor{block title}{fg=blue!70!black, bg=blue!15!white} 
 \setbeamercolor{block body}{fg=black, bg=blue!10!white}
 
 
-
+\includeonly{calculus2/cal2}
 \begin{document}
-\title{微分・積分 第1回} 
+\title{微分・積分 第３回} 
 \author{慶應義塾大学}            %% ここに書かれた情報は色々なところに使われるので
 \institute[]{総合政策学部・環境情報学部}   %% なるべく設定した方が良い
-\date{}
-
+\date{2024年4月22日}
+\maketitle
+\include{housekeep}
 \include{calculus1/cal1}
 \include{calculus2/cal2}
 \include{calculus3/cal3}
