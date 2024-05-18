@@ -142,6 +142,33 @@ $$
 \end{itemize}
 
 \end{frame}
+\begin{slide}{加法定理の図的な説明}
+%\begin{eqnarray}
+%\sin(A+B) &=& \sin{A}\cos{B} + \sin{B}\cos{A} \\
+%\sin(A-B) &=& \sin{A}\cos{B} - \sin{B}\cos{A} \\
+%\cos(A+B) &=& \cos{A}\cos{B}-\sin{A}\sin{B} \\
+%\cos(A-B)&=&\cos{A}\cos{B}+\sin{A}\sin{B}
+%\end{eqnarray}
+\begin{figure}[h]                                                                      
+\centering
+\includegraphics[width=3cm]{calculus5/add.eps}
+%\caption{加法定理の図解}
+%\label{fig:additive}
+\end{figure}
+\begin{equation}
+\overrightarrow{op} = \cos{\beta}(\cos{\alpha}, \sin{\alpha})
+\end{equation}
+であり、$\overrightarrow{pq}$は$\overrightarrow{op}$に直交して長さが$\sin{\beta}$であるため
+\begin{equation}
+\overrightarrow{pq} = \sin{\beta}(-\sin{\alpha}, \cos{\alpha})
+\end{equation}
+となるため$\overrightarrow{oq}$は
+\begin{eqnarray}
+\overrightarrow{oq} &=& \overrightarrow{op}+\overrightarrow{pq}\nonumber \\
+&=& (\cos{\alpha}\cos{\beta} - \sin{\alpha}\sin{\beta}, \sin{\alpha}\cos{\beta}+\sin{\beta}\cos{\alpha})
+\end{eqnarray}
+となり、加法定理を与える。
+\end{slide}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -411,7 +438,7 @@ $g(x)$の連続性より, $h \to 0$で$k\to 0$に注意すると
 & =  \lim_{h\to 0}\frac{f(g(x)+k)-f(g(x))}{k} \frac{g(x+h)-g(x)}{h} \\
 & =f'(g(x))g'(x)
 \end{align*}
-仮定が成立しない例もあるので, 厳密な証明としては不十分. 
+$\lim_{h\to 0}g(x+h) - g(x) = 0$の場合、仮定が成立しないので, 厳密な証明としては不十分. 
 
 \end{frame}
 
@@ -420,29 +447,56 @@ $g(x)$の連続性より, $h \to 0$で$k\to 0$に注意すると
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\begin{frame}
-\frametitle{定理\ref{合成関数}の証明 (発展)}
-
-
-一般に, $f(x)$が$a$で微分可能なとき, 関数$\delta(x)$で$\displaystyle \lim_{x\to a}\delta(x)=0$なるものが存在して
-$$
-f(x)=f(a)+f'(a)(x-a)+\delta(x)(x-a)
-$$
-と書くことができる. 
-$a$を$g(x)$, $x$を$g(x+h)$に置き換えることで
-\begin{align*} 
-f(g(x+h))=& f(g(x))+f'(g(x))(g(x+h)-g(x)) \\
-&+\delta(g(x+h))(g(x+h)-g(x)) 
-\end{align*}
-これより
-\begin{align*} 
-\frac{f(g(x+h))-f(g(x))}{h}= & f'(g(x))\frac{g(x+h)-g(x)}{h} \\
-&+\delta(g(x+h))\frac{g(x+h)-g(x)}{h}. 
-\end{align*}
-$h\to 0$として, 第一項は$f'(g(x))g'(x)$に第二項は$0$に収束する. 
-\end{frame}
-
-
+%\begin{frame}
+%\frametitle{定理\ref{合成関数}の証明 (発展)}
+%
+%
+%一般に, $f(x)$が$a$で微分可能なとき, 関数$\delta(x)$で$\displaystyle \lim_{x\to a}\delta(x)=0$なるものが存在して
+%$$
+%f(x)=f(a)+f'(a)(x-a)+\delta(x)(x-a)
+%$$
+%と書くことができる. 
+%$a$を$g(x)$, $x$を$g(x+h)$に置き換えることで
+%\begin{align*} 
+%f(g(x+h))=& f(g(x))+f'(g(x))(g(x+h)-g(x)) \\
+%&+\delta(g(x+h))(g(x+h)-g(x)) 
+%\end{align*}
+%これより
+%\begin{align*} 
+%\frac{f(g(x+h))-f(g(x))}{h}= & f'(g(x))\frac{g(x+h)-g(x)}{h} \\
+%&+\delta(g(x+h))\frac{g(x+h)-g(x)}{h}. 
+%\end{align*}
+%$h\to 0$として, 第一項は$f'(g(x))g'(x)$に第二項は$0$に収束する. 
+%\end{frame}
+\begin{slide}{定理\ref{合成関数}の証明 2}
+$y=g(x)$の微分は
+\begin{equation}
+g(x)'= \lim_{h\to 0} \frac{g(x+h) - g(x)}{h} \nonumber
+\end{equation}
+なので, $g(x+h)$は微分の誤差を表す関数
+$p(x) \quad \lim_{x\to 0} p(x+h) = 0$を用いて以下のように書ける。
+$p(x+h)h$は$p(x+h)$と書いたほうが自然であるが、後で$h$で割りたいので、このように定義しておく。
+\begin{equation}
+g(x+h) = g(x) + g(x)'h + p(x+h)h\nonumber
+\end{equation}
+図で書くと以下である。
+\begin{figure}[h]
+\includegraphics[width=4cm]{calculus5/gosei.eps}
+\end{figure}
+\end{slide}
+\begin{slide}{定理\ref{合成関数}の証明2}
+同様に$f(y)$についても微分の誤差を表す関数$q(y) \quad \lim_{u\to 0} q(y+u) = 0$を用い
+\begin{equation}
+f(y+u) = f(y) + f(y)'u+q(y+u)u \nonumber 
+\end{equation}
+であり$u = g(x+h) - g(x) = (g'(x) + p(x+h)) h$なので、以下のように求められる。
+\begin{eqnarray}
+(f(g(x)))' &=& \lim_{h\to 0} \frac{f(y+u) - f(y)}{h}  \nonumber \\
+&=& \lim_{h\to 0} \frac{(f'(y) + q(y+u)) u}{h} \nonumber \\
+&=& \lim_{h\to 0} \frac{(f'(y) + q(y+u))(g'(x) + p(x+h))\cancel{h}}{\cancel{h}} \nonumber \\
+&=& \lim_{h\to 0}(f'(y) + q(y+u))(g'(x) + p(x+h)) = f'(y) g'(x) \nonumber 
+\end{eqnarray}
+\end{slide}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -505,7 +559,7 @@ $f(y)=e^y$と$g(x)=3x^2+7$を用いて$f(g(x))=e^{3x^2+7}$と書けることか�
 \begin{enumerate}
 \item $(x^2+x+1)^9$, 
 \item $\sin^3 x$, 
-\item $\cos x^2$, 
+\item $\cos( x^2)$, 
 \item $(x^2+1)^2(2x^3-1)^4$. 
 %\item $\cos \frac{1}{x}$, 演習に
 %\item $\cos^3(2x+1)$. 
