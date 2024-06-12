@@ -7,10 +7,77 @@
 
 
 \begin{enumerate}
+\item ロピタルの定理
 \item ロルの定理, 平均値の定理, コーシーの平均値の定理, 
 \item 高次導関数, テイラーの定理, 有限テイラー展開
 \end{enumerate} 
 
+
+
+\end{frame}
+
+
+\section{ロピタルの定理}
+
+\begin{frame}
+\frametitle{ロピタルの定理(L'Hopital's theorem)}
+
+微分は不定形の極限を計算する強力な手法を与える. 
+
+\begin{Thm}[ロピタルの定理]
+関数$f(x),g(x)$が$a$を除く$a$の近傍において微分可能であり, 
+$$
+\lim_{x\to a}f(x) = \lim_{x\to a}g(x)=0
+$$
+かつ$g'(x) \ne0$とする. このとき極限$\displaystyle \lim_{x\to a}\frac{f'(x)}{g'(x)}$が存在するならば
+$$
+\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}. 
+$$
+\end{Thm}
+
+ロピタルの定理は$a=\pm \infty$や$\displaystyle \lim_{x\to a}f(x) = \lim_{x\to a}g(x)=\pm \infty$の場合にも成立する. 
+証明は次回行う. 
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{ロピタルの定理}
+
+
+\begin{Prob}
+次の極限を計算せよ. ロピタルの定理を使う際には, 仮定に注意する.  \vspace{2mm}
+\begin{enumerate}
+\item $\displaystyle \lim_{x\to 0} \frac{\sin x}{x}$ \vspace{2mm}
+\item  $\displaystyle \lim_{x\to 1} \frac{\log x}{x-1}$ \vspace{2mm}
+\item $\displaystyle \lim_{x\to \infty} \frac{10^{10}x}{e^x}$ \vspace{2mm}
+\item $\displaystyle \lim_{x\to 0} \frac{\sqrt{x+1}-1}{x}$ \vspace{2mm}
+\item $\displaystyle \lim_{x\to 0} \frac{\sin x-x}{x^3}$ 
+\end{enumerate}
+\end{Prob}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}
+\frametitle{ロピタルの定理}
+
+答え
+
+\begin{enumerate}
+\item $\displaystyle \lim_{x\to 0} \frac{\sin x}{x}= \lim_{x\to 0} \frac{\cos x}{1}=1$ \vspace{3mm}
+\item  $\displaystyle \lim_{x\to 1} \frac{\log x}{x-1}= \lim_{x\to 1} \frac{x^{-1}}{1}=1$ \vspace{3mm}
+\item $\displaystyle \lim_{x\to \infty} \frac{10^{10}x}{e^x}= \lim_{x\to \infty} \frac{10^{10}}{e^x}=0$ \vspace{3mm}
+\item $\displaystyle \lim_{x\to 0} \frac{\sqrt{x+1}-1}{x}= \lim_{x\to 0} \frac{\frac{1}{2}(x+1)^{-\frac{1}{2}}}{1}=\frac{1}{2}$ \vspace{3mm}
+\item $\displaystyle \lim_{x\to 0} \frac{\sin x-x}{x^3}= \lim_{x\to 0} \frac{\cos x-1}{3x^2}= \lim_{x\to 0} \frac{-\sin x}{6x}=-\frac{1}{6}$ 
+\end{enumerate}
 
 
 \end{frame}
@@ -31,7 +98,7 @@
 
 
 \begin{frame}
-\frametitle{ロルの定理}
+\frametitle{ロルの定理(Roll's theorem)}
 
 
 \begin{Thm}[ロルの定理]
@@ -60,7 +127,7 @@ $c$において$f(x)$が極値をとるので, $f'(c)=0$.
 
 
 \begin{frame}
-\frametitle{平均値の定理}
+\frametitle{平均値の定理(Mean Value theorem)}
 
 ロルの定理を斜めにずらしたものが平均値の定理である. 
 
@@ -226,6 +293,63 @@ $$
 $x \to a-0$の場合も同様である. 
 
 \end{frame}
+\begin{slide}{ロピタルの定理の応用1}
+次の極限を求めよ。
+\begin{equation}
+\lim_{x \to 0} \frac{\cos{x} - 1}{x^2} \nonumber
+\end{equation}
+\vspace{5mm}
+
+
+分子 $\lim_{x\to0} \cos{x} - 1 = 0$, 分母 $\lim_{x\to 0}x^2 = 0$なので、分子、分母を微分して
+\begin{equation}
+\lim_{x \to 0} \frac{\cos{x} - 1}{x^2} = \lim_{x\to 0} \frac{-\sin{x}}{2x} \nonumber 
+\end{equation}
+
+この分子、分母の極限がどちらも０なのでさらに微分して
+\begin{equation}
+\lim_{x\to 0} \frac{-\sin{x}}{2x}=  \lim_{x\to 0} \frac{-\cos{x}}{2}=-\frac{1}{2}  \nonumber
+\end{equation}
+
+
+\end{slide}
+
+\begin{slide}{ロピタルの定理の応用2}
+次の極限を求めよ。
+\begin{equation}
+\lim_{x \to 0} x\log{x} \nonumber
+\end{equation}
+\vspace{5mm}
+
+
+$\lim_{x\to 0} \log{x} = -\infty$なので
+\begin{equation}
+\lim_{x \to 0} x\log{x} = \lim_{x\to 0} \frac{\log{x}}{x^{-1}} \nonumber
+\end{equation}
+と変形すると分子はマイナス∞、 分母はプラス∞となる。分母分子を微分すると
+\begin{equation}
+\lim_{x\to 0} \frac{\log{x}}{x^{-1}}  = \lim_{x\to 0} \frac{\frac{1}{x}}{-x^{-2}}  = -\lim_{x\to 0} x = 0 \nonumber
+\end{equation}
+
+\end{slide}
+
+
+\begin{slide}{ロピタルの定理の応用3}
+次の極限を求めよ。
+\begin{equation}
+\lim_{x \to \infty} xe^{-x} \nonumber
+\end{equation}
+\vspace{5mm}
+
+
+$\lim_{x\to \infty} x  = \infty$,  $\lim_{x\to \infty} e^{-x} = 0$なので
+分母、分子を微分して
+\begin{equation}
+\lim_{x \to \infty} xe^{-x} = \lim_{x \to \infty}\frac{ 1}{e^{x}} = 0  \nonumber
+\end{equation}
+
+
+\end{slide}
 
 
 

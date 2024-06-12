@@ -29,6 +29,7 @@
 \usepackage{boxedminipage}
 \usepackage{rdbkbox}
 \usepackage{bm}
+\usepackage{listings}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
@@ -126,14 +127,24 @@
 \setbeamercolor{block title}{fg=blue!70!black, bg=blue!15!white} 
 \setbeamercolor{block body}{fg=black, bg=blue!10!white}
 \newcommand{\rref}[1]{(\ref{#1})}
+\usepackage{listings}
+\lstset{
+  %% language={C}, %プログラミング言語によって変える。
+  basicstyle={\ttfamily\small},
+  keywordstyle={\color{blue}},
+  commentstyle={\color{green}},
+  stringstyle=\color{red},
+  tabsize=2,
+  %% breaklines=true, %折り返し
+}
 
 
-\includeonly{calculus4/cal4,calculus5/cal5}
+\includeonly{calculus10/cal10}
 \begin{document}
-\title{微分・積分 第６回} 
+\title{微分・積分 10回} 
 \author{慶應義塾大学}            %% ここに書かれた情報は色々なところに使われるので
 \institute[]{総合政策学部・環境情報学部}   %% なるべく設定した方が良い
-\date{2024年5月20日}
+\date{2024年6月17日}
 \maketitle
 \include{housekeep}
 \include{calculus1/cal1}
@@ -150,8 +161,7 @@
 \include{calculus10/cal10}
 \include{calculus11/cal11}
 \include{calculus12/cal12}
-
 \include{calculus13/cal13}
 
 
-\end{document}
+\end{document}h

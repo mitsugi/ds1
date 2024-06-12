@@ -11,6 +11,7 @@
 \item テイラーの定理の証明
 \item テイラー展開, 解析的関数
 \item 応用, オイラーの公式
+\item 収束半径
 \end{enumerate} 
 
 
@@ -18,287 +19,185 @@
 \end{frame}
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{テイラーの定理}
-
-\begin{frame}
-\frametitle{関数の多項式近似}
-
-
+\begin{slide}{整級数・テイラー展開・マクローリン展開}
 \begin{itemize}
-\item 微分とは, 関数を$1$次多項式(関数)で近似した様子を記述するもの. 
-導関数の情報から関数の増減の解析が可能になった. 
-\item 導関数がさらに微分可能ならば, $2$回微分することにより凹凸を知ることができた. 
-これは関数を$2$次多項式で近似することに相当する.
-\item 関数がさらに微分可能の場合には, $3$回微分, $4$回微分, ... を考えることにより, 
-与えられた関数の$3$次多項式, $4$次多項式, ... で近似できる. 
+\item 多項式近似の係数を求めるために整級数（power series)を用いる\footnote{整級数は、「多項式関数で表す」と等価である}
+\item 与えられた関数を指定した値$a$の付近の整級数で表すことをテイラー展開(Taylor expansion)、$a=0$の時マクローリン展開(Maclaurin expansion)\footnote{マクローラン展開と訳されることもある}とよび、その時使う級数をテイラー級数(Taylor series)、マクローリン級数(Maclaurin series）と呼ぶ。
+\item 基本原理はテイラーの定理(Taylor's theorem)である
 \end{itemize}
-一般の関数(三角関数, 指数関数, 対数関数)などは難しいが, 多項式関数は比較的簡単である. 
-
-\end{frame}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-\begin{frame}
-\frametitle{テイラーの定理}
-
-\begin{Thm}[テイラーの定理] \label{テイラー}
-開区間$I$で定義された関数$f(x)$が$n$回微分可能であるとき. 
-任意の$a \in I$に対して, 
- \begin{align*}
-f(x) & = \sum_{k=0}^{n-1}\frac{f^{(k)}(a)}{k!}(x-a)^k + \frac{f^{(n)}(c)}{k!}(x-a)^n \\
-& =  f(a)+ f'(a)(x-a) + \frac{f^{(2)}(a)}{2!}(x-a)^2  + \frac{f^{(3)}(a)}{3!}(x-a)^3 \\
-& \ \ \ + \dots + \frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}+\frac{f^{(n)}(c)}{k!}(x-a)^n . 
-\end{align*}
-を満たす$c \in (a,x)$が存在する. ($a<x$の場合) 
-\end{Thm}
-上記の表示を有限テイラー展開という.
-
-\end{frame}
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}
-\frametitle{マクローリンの定理}
-
-
-特に$a=0$の場合にはマクローリンの定理と呼ばれる. 
-
-
-\begin{Thm}[マクローリンの定理]  \label{マクローリン}
-$0$を含む開区間$I$で定義された関数$f(x)$が$n$回微分可能であるとき. 
- \begin{align*}
-f(x) & = \sum_{k=0}^{n-1}\frac{f^{(k)}(0)}{k!}x^k + \frac{f^{(n)}(\theta x)}{n!}x^n \\
-& =  f(0)+ f'(0)x + \frac{f^{(2)}(0)}{2!}x^2  + \frac{f^{(3)}(0)}{3!}x^3 \\
-& \ \ \ + \dots + \frac{f^{(n-1)}(0)}{(n-1)!}x^{n-1}+\frac{f^{(n)}(\theta x)}{n!}x^n . 
-\end{align*}
-を満たす$\theta \in (0,1)$が存在する. ($0<x$の場合) 
-\end{Thm}
-$\theta x \in (0,x)$に注意. 上記の表示を有限マクローリン展開という.
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}
-\frametitle{テイラーの定理}
-
-
+\end{slide}
+\begin{slide}{5.2 [2] テイラー展開}
 \begin{itemize}
-\item テイラーの定理における
-$$
-P_{n-1}(x)=\sum_{k=0}^{n-1}\frac{f^{(k)}(a)}{k!}(x-a)^k, \ \ \ 
-R_n(x)=\frac{f^{(n)}(c)}{k!}(x-a)^n
-$$
-はそれぞれ($n-1$次の)\underline{テイラー多項式}と\underline{剰余項}と呼ばれる. 
-\item 微分の観点からは, $f(x)$と$P_{n-1}(x)$は似ている. 
-$$
-f(a)=P_{n-1}(a), \ \ f '(a)=P'_{n-1}(a), \ \dots, \  f^{(n-1)}(a)=P^{(n-1)}_{n-1}(a). 
-$$
-実際, $f(x)$が$n$次多項式であれば, $f(x)=P_n(x)$であった. 
-\item テイラーの定理は$f(x)$と$P_{n-1}(x)$の誤差を$f(x)$の$n$次微分係数を用いて評価できることを主張している. 
+\item 与えられた関数$f(x)$を定数$a$を中心にして、多項式近似したものがテイラー展開である。
+\begin{equation}
+f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2!}f''(a)(x-a)^2 + \frac{1}{3!}f'''(a)(x-a)^3 + \cdots \label{eq:taylorseries}
+\end{equation}
+\item テイラー展開において$a=0$の場合、マクローリン展開と呼ばれる。
+\begin{equation}
+f(x) \approx f(0) + f'(0)(x) + \frac{1}{2!}f''(0)(x)^2 + \frac{1}{3!}f'''(0)(x)^3 + \cdots \label{eq:macseries}
+\end{equation}
 \end{itemize}
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-\begin{frame}
-\frametitle{$e^x$の有限マクローリン展開}
-
-$f(x)=e^x$の有限マクローリン展開
-\begin{align*}
-e^x &= P_5(x)+R_6(x) \\
-& = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\frac{x^5}{5!}+\frac{e^{\theta x}}{6!}x^6. 
-\end{align*}
-を用いて$f(1)=e$の近似値を求める. 
-$$
-P_5(1)=\frac{163}{60}=2.71666\dots
-$$
-であるが, テイラーの定理より誤差は
-$$
-|e-P_5(1)|=\frac{e^\theta}{6!}<\frac{e}{6!}<\frac{3}{6!}=\frac{1}{240}=0.004166\dots
-$$
-
-\end{frame}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{テイラーの定理の証明}
-
-\begin{frame}
-\frametitle{コーシーの平均値の定理}
-
-コーシーの平均値の定理を用いて, テイラーの定理を証明する. 
-
-\begin{Thm}[コーシーの平均値の定理] 
-微分可能な関数$f(x)$, $g(x)$の定義域に$[a,b]$が含まれ, $a<x<b$において$g'(x) \ne 0$であれば, 
-$$
-\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}
-$$
-なる$c \in (a,b)$が存在する. 
-\end{Thm}
-
-直感的には媒介変数$t \in [a,b]$を用いて$(x,y)=(g(t),f(t))$の軌跡を考えれば良い. 
-
-\vspace{-5mm}
-
- \begin{figure}[htbp]
- \begin{center} 
-  \includegraphics[width=55mm]{calculus9/CauchyMean.png}
- \end{center}
-\end{figure}
-
-\end{frame}
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{テイラーの定理の証明}
-
-\begin{frame}
-\frametitle{テイラーの定理の証明}
-
-関数 \vspace{-5mm}
-\begin{align*}
- F(x) =&  f(x)-\sum_{k=0}^{n-1}\frac{f^{(k)}(a)}{k!}(x-a)^k \\
-=&   f(x)-\big\{ f(a)+ f'(a)(x-a) + \frac{f^{(2)}(a)}{2!}(x-a)^2   \\
-& \ \ \ + \dots + \frac{f^{(n-1)}(a)}{(n-1)!}(x-a)^{n-1}\big\}
-\end{align*}
-を考え, これが剰余項$\frac{f^{(n)}(c)}{n!}(x-a)^n \ (a<c<x)$の形に書けることを示す. 
-簡単な計算で次が分かる. 
+\end{slide}
+\begin{slide}{テイラー展開の導出}
 \begin{itemize}
-\item $F(a)=F'(a)=F''(a)= \dots =F^{(n-1)}(a)=0$, 
-\item $F^{(n)}(a)=f^{(n)}(a)$. 
+\item 与えられた関数が次のように多項式で近似できるとし、$a$を中心に$a_0, a_1, \cdots$を求める。
+\begin{equation}
+f(x) =  a_0 + a_1 x + a_2x^2 + a_3 x^3 + a_4x^4 +\cdots \label{eq:taylor}
+\end{equation}
+$x=a$では以下が成立。
+\begin{equation}
+f(a) =  a_0 + a_1 a + a_2a^2 + a_3 a^3 + a_4a^4 +\cdots  \nonumber 
+\end{equation}
+高次導関数は以下のように求められる。係数が次数に応じた階乗になることに注目。
+\begin{eqnarray}
+f'(x) &=& a_1 + 2a_2x+ 3a_3 x^2 + 4a_4x^3+\cdots \nonumber \\
+f''(x) &=& 2a_2 + 6a_3 x + 12 a_4x^2 + \cdots \nonumber \\
+f'''(x) &=& 6a_3 + 24 a_4 x + \cdots \nonumber \\
+\vdots \label{eq:higherderivatives}
+\end{eqnarray}
+\end{itemize}
+\end{slide}
+\begin{slide}{テイラー展開の導出2}
+\begin{itemize}
+\item 式\ref{eq:taylor}に$x=a+h$を代入すると
+\begin{eqnarray}
+f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
+&=& a_0 + a_1 a + a_2 a^2 + a_3 a^3 + a_4 a^4 + \cdots \nonumber \\
+&+& h(a_1 + 2a_2a + 3a_3a^2 + 4a_4a^3 + \cdots \nonumber \\
+&+& h^2(a_2 + 3a_3a + 6a_4 a^2 + \cdots \nonumber \\
+&+& h^3(a_3 + 4a_4a + \cdots \nonumber 
+\end{eqnarray}
+\item 式\ref{eq:higherderivatives}の高次導関数を用いると
+\begin{eqnarray}
+f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
+&=& f(a) +  hf'(a) + \frac{h^2}{2!}f''(a) + \frac{h^3}{3!}f'''(a) + \cdots  \nonumber
+\end{eqnarray}
+$h=x-a$なのでテイラー展開(式\ref{eq:taylorseries})を得る。$a=0$ならマクローリン展開（式\ref{eq:macseries})である。
 \end{itemize}  
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}
-\frametitle{テイラーの定理の証明}
-
+\end{slide}
+\begin{slide}{例題 5.2}
+次の関数をマクローリン展開を用いて三次式で近似せよ。
 \begin{itemize}
-\item $F(x)$と$G(x)=(x-a)^n$に対して, コーシーの平均値の定理を使うと
-\begin{align*}
-\frac{F(x)}{G(x)}=\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(x_1)}{G'(x_1)}
-\end{align*}
-なる$a<x_1<x$が存在する. 
-\item $F'(x)$と$G'(x)=n(x-a)^{n-1}$に対して, コーシーの平均値の定理を使うと
-\begin{align*}
-\frac{F'(x_1)}{G'(x_1)}=\frac{F'(x_1)-F'(a)}{G'(x_1)-G'(a)}=\frac{F''(x_2)}{G''(x_2)}
-\end{align*}
-なる$a<x_2<x_1$が存在する. 
-\item これを繰り返す. 
+\item $\sin{x}$ 
+\begin{eqnarray}
+\sin{x} &\approx& \sin{0}  + \cos{0}x -\frac{1}{2}\sin{0}x^2- \frac{1}{6}\cos{0}x^3 \nonumber  \\
+&=& x - \frac{1}{6}x^3 
+\end{eqnarray}
+\item $\log_e{(x+1)}$
+\begin{eqnarray}
+\log_e{(x+1)} &\approx& \log_e{1} + \frac{1}{0+1} x - \frac{1}{2}\frac{1}{(0+1)^2} x^2 +\frac{2}{6} \frac{1}{(1+0)^3} x^3 \nonumber \\
+&=& x - \frac{1}{2}x^2 + \frac{1}{3}x^3\nonumber 
+\end{eqnarray}
 \end{itemize}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}
-\frametitle{テイラーの定理の証明}
-
-纏めると
-\begin{align*}
-\frac{F(x)}{G(x)}=\frac{F'(x_1)}{G'(x_1)}
-=\frac{F''(x_2)}{G''(x_2)}=\dots =\frac{F^{(n-1)}(x_{n-1})}{G^{(n-1)}(x_{n-1})}=\frac{F^{(n)}(x_{n})}{G^{(n)}(x_{n})}
-\end{align*}
-なる$a<x_{n}<x_{n-1}<\dots<x_1<x$が存在する. 
-これより
-$$
-\frac{F(x)}{(x-a)^n}=\frac{F(x)}{G(x)}=\frac{F^{(n)}(x_{n})}{G^{(n)}(x_{n})}=\frac{f^{(n)}(x_n)}{n!}
-$$
-なので, $c=x_n$として
-$$
-F(x)=\frac{f^{(n)}(c)}{n!}(x-a)^n
-$$
-が示された. 
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\section{テイラー展開}
-
-\begin{frame}
-\frametitle{テイラー展開}
-
-
+\end{slide}
+\begin{slide}{例題5.2の図解}
+\begin{figure}[h]
+\includegraphics[width=11cm]{calculus9/macapx.eps}
+\end{figure}
+\end{slide}
+\begin{slide}{問題　5.2}
+次の関数をマクローリン展開を用いて三次式で近似せよ。
 \begin{itemize}
-%\item テイラーの定理とマクローリンの定理で得られるの関数の表示をそれぞれ有限テイラー展開, 有限マクローリン展開という. 
-\item $C^\infty$級関数$f(x)$に関して
-剰余項
-$$
-R_n=\frac{f^{(n)}(c)}{k!}(x-a)^n \rightarrow 0 \ \ \ (n \rightarrow \infty)
-$$
-が成立すれば, $f(x)$は冪級数展開(単項式の無限和として表現)
-$$
-f(x) = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k. 
-$$
-としての表示を持つ.  
-\item 剰余項$R_n$に関する条件は, $x$が$a$に十分近いときに満たされることが多いが, この講義では深入りしない. (収束半径の議論が必要.)
+\item $\frac{1}{x+1}$
+\item $\sqrt{x+1}$
 \end{itemize}
+\end{slide}
+\begin{slide}{[3]テイラーの定理：参考}
+\begin{itemize}
+\item 関数$f(x)$が$C^{n+1}$級で区間$a \leqq x \leqq b$が$f(x)$の定義域に含まれていれば$h=b-a$として
+\begin{eqnarray}
+f(b) &=& f(a) + f'(a)h+\frac{1}{2!}f''(a)h^2 + \cdots \nonumber \\
+&+& \frac{1}{n!}f^{(n)}(a)h^n + \frac{1}{(n+1)!}f^{(n+1)}(c)(h)^{n+1} \nonumber \\
+&=& f(a) + \sum_{i=1}^n \frac{1}{i!}f^{(i)} (a)h^i +  \frac{1}{(n+1)!}f^{(n+1)}(c)(h)^{n+1} \nonumber
+\end{eqnarray}
+となる$c$が$a$と$b$の間に少なくとも一つ存在する。
+\item 証明：テイラー級数を$f^{(n)}$の項で打ち切った場合と考え、次の$g(x)$を導入する。
+\begin{equation}
+g(x) =  f(x) +  \sum_{i=1}^n \frac{1}{i!}f^{(i)}(x) (b-x)^i  + K(b-x)^{n+1}   \nonumber
+\end{equation}
+\end{itemize}
+\end{slide}
+\begin{slide}{[3]テイラーの定理:参考２}
+\begin{itemize}
+\item $K$を次式が成立するように決定する。
+\begin{equation}
+g(a) = f(a) + \sum_{i=1}^n \frac{1}{i!}f^{(i)}(a) (b-a)^i  + K(b-a)^{n+1} = f(b) \nonumber 
+\end{equation}
+具体的には$K$は以下である。
+\begin{equation}
+K = \frac{f(b) - f(a) - \sum_{i=1}^n \frac{1}{i!}f^{(i)}(a)(b-a)^i }{(b-a)^{n+1}} \label{eq:taylortheorem}
+\end{equation}
+$x=b$の時は式の定義により明らかに$g(b) = f(b)$である。
+\end{itemize}
+\end{slide}
+\begin{slide}{[3]テイラーの定理:参考３}
+\begin{itemize}
+\item　このように$K$を決めることで$g(a)=g(b)=f(b)$なのでロールの定理（7回参照)により$g'(c)=0$となる$c$が$a<c<b$に少なくとも一つ存在する。
+\begin{eqnarray}
+&& g'(x) = f'(x) \nonumber  \\
+&+& \sum_{i=1}^n \frac{1}{i!}f^{(i+1)}(x)(b-x)^i - \frac{i}{i!}f^{(i)}(x)(b-x)^{i-1} \nonumber \\
+&-& (n+1)K(b-x)^{n} \nonumber
+\end{eqnarray}
+なので$x=c$の時
+\begin{eqnarray}
+&& g'(c) = f'(c) \nonumber \\
+ &+& \sum_{i=1}^n \frac{1}{i!}f^{(i+1)}(c)(b-c)^i - \frac{1}{(i-1)!}f^{(i)}(c)(b-c)^{i-1} \nonumber \\
+ &-& (n+1)K(b-c)^{n} = 0 \nonumber
+\end{eqnarray}
+\end{itemize}
+\end{slide}
+\begin{slide}{[3]テイラーの定理:参考４}
+\begin{itemize}
+\item 総和の中は次のようにほとんど打消される。
+\begin{eqnarray}
+&&\sum_{i=1}^n \frac{1}{i!}f^{(i+1)}(c)(b-c)^i - \frac{1}{(i-1)!}f^{(i)}(c)(b-c)^{i-1} \nonumber \\
+&=& \cancel{f^{(2)}(c)(b-c)} - f'(c) \nonumber \\
+&& + \cancel{\frac{1}{2}f^{(3)}(c)(b-c)^2}  - \cancel{f^{(2)}(c)(b-c)} \nonumber \\
+&& + \cancel{\frac{1}{3!}f^{(4)}(c)(b-c)^3} - \cancel{\frac{1}{2}f^{(3)}(c)(b-c)^2} \nonumber \\
+&& \vdots \nonumber \\
+&& + \frac{1}{n!}f^{(n+1)}(c)(b-c)^n- \cancel{\frac{1}{(n-1)!}f^{(n)}(c)(b-c)^{n-1}} \nonumber \\
+&=&  \frac{1}{n!}f^{(n+1)}(c)(b-c)^n - f'(c) \label{eq:taylorsum}
+\end{eqnarray}
+\end{itemize}
+\end{slide}
+\begin{slide}{[3]テイラーの定理:参考５}
+\begin{itemize}
+\item 式\ref{eq:taylorsum}を用いて$g'(c)$を書き直すと
+\begin{equation}
+g'(c) = \cancel{f'(c)} + \frac{1}{n!}f^{(n+1)}(c)(b-c)^n - \cancel{f'(c)} - (n+1)K(b-c)^{n} = 0 \nonumber 
+\end{equation}
+\item したがって
+\begin{equation}
+K = \frac{1}{(n+1)!}f^{(n+1)}(c) \nonumber 
+\end{equation}
+となり、式\ref{eq:taylortheorem}に代入して
+\begin{equation}
+K = \frac{f(b) - f(a) - \sum_{i=1}^n \frac{1}{i!}f^{(i)}(a)(b-a)^i }{(b-a)^{n+1}}  = \frac{1}{(n+1)!}f^{(n+1)}(c) \nonumber
+\end{equation}
+\item 式を変形するとテイラーの定理が得られる。
+\begin{equation}
+f(b) = f(a) + \sum_{i=1}^n \frac{1}{i!}f^{(i)}(a)(b-a)^i  + \frac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(c) \nonumber
+\end{equation}
+\end{itemize}
+\end{slide}
+\begin{slide}{[4]ロピタルの定理:テーラー展開による導出}
+\begin{itemize}
+\item 極限$\lim_{x \to a}\frac{f(x)}{g(x)}$が$\frac{0}{0}$または$\pm\frac{\infty}{\infty}$の時、極限$\lim_{x\to a}\frac{f'(x)}{g'(x)}$が確定した値に収束すれば
+\begin{equation}
+\lim_{x\to a} \frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}
+\end{equation}
+が成り立つ。
+\item 証明：$f(x), g(x)$が$x=a$でゼロの場合、$a$付近でテイラー展開すると
+\begin{eqnarray}
+f'(x) &=& f(a) + f'(a) (x-a) + \frac{1}{2}f''(a)(x-a)^2 + \cdots \nonumber \\
+g(x) &=& g(a) + g'(a)(x-a) +  \frac{1}{2}g''(a)(x-a)^2 + \cdots \nonumber
+\end{eqnarray}
+となる。
+\end{itemize}
+\end{slide}
 
-\end{frame}
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -306,21 +205,12 @@ $$
 
 
 
-\begin{frame}
-\frametitle{テイラー展開}
 
-\begin{Def}
-$C^\infty$級関数$f(x)$に関して, 剰余項が$R_n \to 0$ $(n \rightarrow \infty)$なるとき
-\begin{align*}
-f(x) & = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k \\
-& =  f(a)+ f'(a)(x-a) + \frac{f^{(2)}(a)}{2!}(x-a)^2  + \frac{f^{(3)}(a)}{3!}(x-a)^3 \\
-& \ \ \ + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^{n}+\dots. 
-\end{align*}
-この表示を$f(x)$の\underline{テイラー展開}と呼ぶ. 
-特に$a=0$のときは, マクローリン展開と呼ばれる. 
-\end{Def}
 
-\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 
@@ -429,20 +319,20 @@ $f(x)=\cos x$のマクローリン展開も同様に求めることができる.
 
 
 
-\begin{frame}
-\frametitle{三角関数と弧度法}
-
-解析学において, 三角関数を弧度法で考えることは重要である. 
-実際, 度数法の世界では三角関数の基本的な公式は複雑になる($1^\circ=\frac{\pi}{180}$rad):  
-\begin{itemize}
-\item $\displaystyle \lim_{x\to0}\frac{\sin x}{x}=\frac{\pi}{180}$
-\item $\displaystyle (\sin x)'=\frac{\pi}{180} \cos x, \ \ \  (\cos x)'=-\frac{\pi}{180} \sin x$
-\item $\displaystyle \sin x = \frac{\pi}{180} x - \frac{\pi^3}{180^3}\frac{x^3}{3!}+\frac{\pi^5}{180^5}\frac{x^5}{5!}+\dots$
-\end{itemize}
-弧度法では形式的にラジアンという単位を使うが, 実際は円の半径と弧の比であるから(長さの単位に依存しない)無次元量である. 
-本来, 数は無次元量であり, それゆえ$x+x^3$のような計算が意味を持つのである. 
-
-\end{frame}
+%\begin{frame}
+%\frametitle{三角関数と弧度法}
+%
+%解析学において, 三角関数を弧度法で考えることは重要である. 
+%実際, 度数法の世界では三角関数の基本的な公式は複雑になる($1^\circ=\frac{\pi}{180}$rad):  
+%\begin{itemize}
+%\item $\displaystyle \lim_{x\to0}\frac{\sin x}{x}=\frac{\pi}{180}$
+%\item $\displaystyle (\sin x)'=\frac{\pi}{180} \cos x, \ \ \  (\cos x)'=-\frac{\pi}{180} \sin x$
+%\item $\displaystyle \sin x = \frac{\pi}{180} x - \frac{\pi^3}{180^3}\frac{x^3}{3!}+\frac{\pi^5}{180^5}\frac{x^5}{5!}+\dots$
+%\end{itemize}
+%弧度法では形式的にラジアンという単位を使うが, 実際は円の半径と弧の比であるから(長さの単位に依存しない)無次元量である. 
+%本来, 数は無次元量であり, それゆえ$x+x^3$のような計算が意味を持つのである. 
+%
+%\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -474,7 +364,7 @@ f'(x)=\frac{1}{(1-x)^2}, \ \ \ f''(x)=\frac{2}{(1-x)^3}, \ \ \  f^{(3)}(x)=\frac
 \begin{frame}
 \frametitle{$\frac{1}{1-x}$のマクローリン展開}
 
-$0\le x<1/2$であれば
+$-1 < x < 1$であれば
 $$
 \frac{|x|^n}{|1-\theta x|^{n+1}} \le \frac{|x|^n}{|1-|x||^{n+1}} \to 0 \ \ \ (n\to \infty)
 $$
@@ -487,6 +377,7 @@ $$
 (等比数列の和と思えば良い.)
 
 \end{frame}
+
 
 
 
@@ -538,49 +429,9 @@ $$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\section{解析関数}
-
-\begin{frame}
-\frametitle{解析関数}
-
-\begin{Def}
-$C^\infty$級関数$f(x)$が$a$の近傍で, テイラー展開
-$$
-f(x) = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k 
-$$
-されるとき, $f(x)$は$a$で\underline{解析的}と呼ばれる. 定義域の任意の点で解析的な関数を\underline{解析的関数}という. 
-\end{Def}
-
-\end{frame}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-\begin{frame}
-\frametitle{解析的でない$C^\infty$関数}
-
-
-$C^\infty$関数であっても, 解析的でない関数は存在する. 例えば
-$$
-f(x) = 
-\begin{cases}
-e^{-\frac{1}{x}}  & (x>0) \\
-0 & (x \le 0) 
- \end{cases}
-$$
-原点$0$において解析的でない. \\
-\ \\
-
-実際, 
-$$
-f'(x)=\frac{1}{x^2}e^{-\frac{1}{x}} \longrightarrow 0 \ \ \ (x \to +0)
-$$
-といった計算から, 全ての$n \in \N$に対し$f^{(n)}(0)=0$が成立している. 
-もし$f(x)$がマクローリン展開可能とすると, $f(x)=0$となって矛盾する. 
-\end{frame}
 
 
 
@@ -594,9 +445,9 @@ $$
 \frametitle{$\sin 1$の近似値}
 
 $\sin x$のマクローリン展開 
-$$
-\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\frac{x^9}{9!}+\dots 
-$$
+\begin{equation}
+\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\frac{x^9}{9!}+\dots = \sum_{k=0}^{\infty} (-1)^{k} \frac{1}{(2k+1)!}x^{2^k+1} \nonumber
+\end{equation}
 を用いて, $\sin 1$の近似値を求める. 
 \begin{align*}
 & 1-\frac{1^3}{3!}+\frac{1^5}{5!} = \frac{101}{120}=0.84166\dots \\
@@ -662,70 +513,94 @@ e^x & = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+\frac{x^5}{5!}+\frac{x^
 \begin{frame}
 \frametitle{オイラーの公式 (発展)}
 
-$i^2=-1$なる虚数 $i$を考えて, 指数関数のテイラー展開において, $x$を$ix$に置き換える. 
+$j^2=-1$なる虚数 $j$を考えて, 指数関数のテイラー展開において, $x$を$jx$に置き換える. 
 \begin{align*}
-e^{ix} & = 1+ix+\frac{(ix)^2}{2!}+\frac{(ix)^3}{3!}+\frac{(ix)^4}{4!}+\frac{(ix)^5}{5!}+\frac{(ix)^6}{6!}+\frac{(ix)^7}{7!}+\dots \\
-& = 1+ix-\frac{x^2}{2!}-i\frac{x^3}{3!}+\frac{x^4}{4!}+i\frac{x^5}{5!}-\frac{x^6}{6!}-i\frac{x^7}{7!}+\dots \\
-& = 1  -\frac{x^2}{2!}  +\frac{x^4}{4!}  -\frac{x^6}{6!} +\dots + i(x  -\frac{x^3}{3!}  +\frac{x^5}{5!} -\frac{x^7}{7!} + \dots ) \\
-& = \cos x + i \sin x. 
+e^{jx} & = 1+jx+\frac{(jx)^2}{2!}+\frac{(jx)^3}{3!}+\frac{(jx)^4}{4!}+\frac{(jx)^5}{5!}+\frac{(jx)^6}{6!}+\frac{(jx)^7}{7!}+\dots \\
+& = 1+jx-\frac{x^2}{2!}-j\frac{x^3}{3!}+\frac{x^4}{4!}+j\frac{x^5}{5!}-\frac{x^6}{6!}-j\frac{x^7}{7!}+\dots \\
+& = 1  -\frac{x^2}{2!}  +\frac{x^4}{4!}  -\frac{x^6}{6!} +\dots + j(x  -\frac{x^3}{3!}  +\frac{x^5}{5!} -\frac{x^7}{7!} + \dots ) \\
+& = \cos x + j \sin x. 
 \end{align*}
 
-$e^{ix}$が何を意味するのかを理解するには, 複素関数論を勉強する必要がある. 
 
 \end{frame}
 
+\begin{slide}{収束半径 (radius of convergence)}
+$f(x)$をマクローリン展開して以下の級数を得たとする。
+\begin{equation}
+f(x) = a_0 f(0) + a_1 f^{(1)}(0) x + a_2 f^{(2)}(0) x^2 + a_3 f^{(3)}(0)x^3 + \cdots
+\end{equation}
+$x$のべき級数も含めて $c_k = a_k f^{(k)} x^k$とした場合、
+\begin{equation}
+\lim_{k \to \infty}  \mid \frac{c_{k+1}}{c_k} \mid  < 1
+\end{equation}
+であれば収束する。
+
+\end{slide}
+
+\begin{slide}{収束半径（1)}
+\begin{itemize}
+\item $f(x) = \frac{1}{1-2x}$ : 
+$f(x)$をマクローリン展開すると
+\begin{equation}
+f(x) = \sum_{k=0}^\infty (2x)^k 
+\end{equation}
+収束半径を以下で確認。
+\begin{equation}
+\lim_{k \to \infty} \mid \frac{(2x)^{k+1}}{(2x)^k} \mid = \mid 2x  \mid 
+\end{equation}
+したがって、$\mid 2x \mid < 1$つまり、$-\frac{1}{2} < x < \frac{1}{2}$であれば収束。
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{itemize}
+\end{slide}
+%
+%\begin{slide}{収束半径（2)}
+%\begin{itemize}
+%\item $f(x) = \cos(x)$ : 
+%$f(x)$をマクローリン展開すると
+%\begin{equation}
+%\cos(x) = \sum_{k=0}^{\infty}(-1)^k\frac{x^{2k}}{(2k)!} 
+%\end{equation}
+%収束半径を以下で確認。
+%\begin{equation}
+%\lim_{k \to \infty} \mid \frac{(-1)^{(k+1)}\frac{x^{2(k+1)}}{2(k+1)!}}{(-1)^k\frac{x^{2k}}{(2k!)}} \mid = \lim_{k\to \infty}\mid \frac{-x}{(2k+2)(2k+1)}  \mid = 0 
+%\end{equation}
+%したがって、すべての$x$で収束。
+%
+%
+%\end{itemize}
+%\end{slide}
 
+\begin{slide}{収束半径（2)}
+\begin{itemize}
+\item $f(x) = \log(1+x)$ : 
+$f(x)$をマクローリン展開すると
+\begin{equation}
+\cos(x) = \sum_{k=1}^{\infty}(-1)^{k-1}\frac{x^{k}}{k}
+\end{equation}
+収束半径を以下で確認。
+\begin{equation}
+\lim_{k \to \infty} \mid \frac{(-1)\frac{x^{k+1}}{k+1}}{\frac{x^{k}}{(k)}} \mid = \lim_{k\to \infty}\mid-x \frac{k}{k+1}  \mid = -x 
+\end{equation}
+したがって、$\mid x \mid < 1$つまり、$-1< x < 1 $であれば収束。
+\end{itemize}
+\end{slide}
 
-\begin{frame}
-\frametitle{オイラーの公式 (発展)}
+\begin{slide}{$\log(1+x)$の収束半径の確認}
 
-\begin{Thm}[オイラーの公式]
-\begin{center}
-$
-e^{ix} = \cos x + i \sin x
-$
-\end{center}
-\end{Thm}
+$f(x) = \log(1+x)$の２次マクローリン級数と、６次マクローリン級数を比較。
 
-特に$x=\pi$とした
-$$
-e^{i \pi }=-1
-$$
-は美しい数式として有名である. 
-
-
- \begin{figure}[htbp]
- \begin{center} 
-  \includegraphics[width=30mm, bb=0 0 614 767]{calculus9/Euler.jpg}
- \end{center}
+\begin{figure}[h]
+\includegraphics[width=8cm]{calculus9/roc.eps}
 \end{figure}
+マクローリン級数の次数を多くすると、収束半径内では近似が改善、収束半径外では近似が発散している。
+(roc.xlsx参考)
 
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
+\end{slide}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 
@@ -738,6 +613,16 @@ $$
 \item テイラーの定理の証明
 \item テイラー展開, 解析的関数
 \item 応用, オイラーの公式
+\item 収束半径
 \end{enumerate} 
 
 \end{frame}
+\begin{slide}{課題 \#9}
+$f(x)=\cos(x)$の定義域を$-10 \le x \le 10$とし、二次までのマクローリン展開した場合、$\pm$1.5ラジアンを超えた付近から、下図のように近似精度が急速に劣化してしまう。級数の打ち切り次数を増やすことによって定義域$-10 \le x \le 10$全体で、近似できるか、できないか回答しなさい。もしで近似できると考える場合には、概ね何次まで級数展開すれば良好な近似が与えられるか図を用いるなどして説明せよ。
+
+\begin{figure}[h]
+\includegraphics[width=8cm]{calculus9/roccos.eps}
+\end{figure}
+
+
+\end{slide}

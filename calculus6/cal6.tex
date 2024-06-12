@@ -255,7 +255,6 @@ $$
 g'(y)= \frac{1}{f'(g(y))}. 
 $$
 
-この証明では$g(y)$の微分可能性が暗に仮定されているので, 厳密には不十分である. 
 
 \end{frame}
 
@@ -265,21 +264,21 @@ $$
 
 
 
-\begin{frame}
-\frametitle{定理\ref{逆関数の微分定理}の証明 v2}
-
-$f(x)$は微分可能なので連続であり, 逆関数$g(y)$も連続になる(自明でないが正しい). 
-$y=f(x)$とおくと, $y'\to y$のとき$x'=g(y')\to x$.  
-\begin{align*}
-g'(y) &= \lim_{h\to 0}\frac{g(y+h)-g(y)}{h} \\
-&= \lim_{y'\to y}\frac{g(y')-g(y)}{y'-y} \ \ \  (\text{微分の同値な定義})\\
-& = \lim_{x'\to x} \frac{x'-x}{f(x')-f(x)} \\
-& = \lim_{x'\to x} \frac{1}{\frac{f(x')-f(x)}{x'-x}} = \frac{1}{f'(x)}
-\end{align*}
-
-%ただし$\displaystyle \lim_{x'\to x}\frac{f(x')-f(x)}{x'-x}=\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}=f'(x)$に注意する. 
-
-\end{frame}
+%\begin{frame}
+%\frametitle{定理\ref{逆関数の微分定理}の証明 v2}
+%
+%$f(x)$は微分可能なので連続であり, 逆関数$g(y)$も連続になる(自明でないが正しい). 
+%$y=f(x)$とおくと, $y'\to y$のとき$x'=g(y')\to x$.  
+%\begin{align*}
+%g'(y) &= \lim_{h\to 0}\frac{g(y+h)-g(y)}{h} \\
+%&= \lim_{y'\to y}\frac{g(y')-g(y)}{y'-y} \ \ \  (\text{微分の同値な定義})\\
+%& = \lim_{x'\to x} \frac{x'-x}{f(x')-f(x)} \\
+%& = \lim_{x'\to x} \frac{1}{\frac{f(x')-f(x)}{x'-x}} = \frac{1}{f'(x)}
+%\end{align*}
+%
+%%ただし$\displaystyle \lim_{x'\to x}\frac{f(x')-f(x)}{x'-x}=\lim_{h \to 0} \frac{f(x+h)-f(x)}{h}=f'(x)$に注意する. 
+%
+%\end{frame}
 
 
 
