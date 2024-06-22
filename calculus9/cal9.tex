@@ -229,9 +229,9 @@ $$
 ただし$0<\theta < 1$. 
 任意の$x$に対して
 $$
-\frac{e^{\theta x}}{n!}x^n \to 0 \ \ \ (n \to \infty)
+\frac{e^{\theta x}}{n!}x^n \to 0 \ \ \ (n \to \infty) 
 $$
-であるから, $f(x)=e^x$のマクローリン展開は
+であるから\footnote{次ページで証明}, $f(x)=e^x$のマクローリン展開は
 $$
 e^x= \sum_{k=0}^{\infty}\frac{x^k}{k!}
 =1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots
@@ -243,7 +243,17 @@ $$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\begin{slide}{$\sum_{n = 0}^{\infty} \frac{x^n}{n!} = 0$の証明}
+$n$は無限大まで大きくなるため、任意の$|x|$よりも大きくなる$N$を選ぶことができる。その場合
+\begin{equation}
+\sum_{n= 0}^{\infty} \frac{x^n}{n!} = \sum_{n = 0}^{N-1} \frac{x^n}{n!} + \sum_{n=N}^{\infty}\frac{x^n}{n!} \nonumber
+\end{equation}
+である。第一項は有限和なので必ず収束する。第２項は自然数$i$を用いて$n=N+i $と書き直すと、$n! = (N+i)(N+i-1) \cdots (N+1) N! $なので、$n! > N^i N!$である。したがって
+\begin{equation}
+ \sum_{n=N}^{\infty}\frac{x^n}{n!} < \frac{x^N}{N!}\sum_{i=0}^\infty \frac{x^i}{N^i} \nonumber
+\end{equation}
+となり$x/N<1$より、上式はゼロに収束する\footnote{後の講義で説明する収束半径を用いるとより直観的に証明できる}. 
+\end{slide}
 
 
 \begin{frame}
