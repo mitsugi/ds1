@@ -4,12 +4,8 @@
 
 \begin{frame}
 \frametitle{今日の内容}
-
-
-前回に引き続いてテイラーの定理に関する話題を議論する. 
 \begin{enumerate}
 \item テイラーの定理の証明
-\item テイラー展開, 解析的関数
 \item 応用, オイラーの公式
 \item 収束半径
 \end{enumerate} 
@@ -38,43 +34,43 @@ f(x) \approx f(0) + f'(0)(x) + \frac{1}{2!}f''(0)(x)^2 + \frac{1}{3!}f'''(0)(x)^
 \end{equation}
 \end{itemize}
 \end{slide}
-\begin{slide}{テイラー展開の導出}
-\begin{itemize}
-\item 与えられた関数が次のように多項式で近似できるとし、$a$を中心に$a_0, a_1, \cdots$を求める。
-\begin{equation}
-f(x) =  a_0 + a_1 x + a_2x^2 + a_3 x^3 + a_4x^4 +\cdots \label{eq:taylor}
-\end{equation}
-$x=a$では以下が成立。
-\begin{equation}
-f(a) =  a_0 + a_1 a + a_2a^2 + a_3 a^3 + a_4a^4 +\cdots  \nonumber 
-\end{equation}
-高次導関数は以下のように求められる。係数が次数に応じた階乗になることに注目。
-\begin{eqnarray}
-f'(x) &=& a_1 + 2a_2x+ 3a_3 x^2 + 4a_4x^3+\cdots \nonumber \\
-f''(x) &=& 2a_2 + 6a_3 x + 12 a_4x^2 + \cdots \nonumber \\
-f'''(x) &=& 6a_3 + 24 a_4 x + \cdots \nonumber \\
-\vdots \label{eq:higherderivatives}
-\end{eqnarray}
-\end{itemize}
-\end{slide}
-\begin{slide}{テイラー展開の導出2}
-\begin{itemize}
-\item 式\ref{eq:taylor}に$x=a+h$を代入すると
-\begin{eqnarray}
-f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
-&=& a_0 + a_1 a + a_2 a^2 + a_3 a^3 + a_4 a^4 + \cdots \nonumber \\
-&+& h(a_1 + 2a_2a + 3a_3a^2 + 4a_4a^3 + \cdots \nonumber \\
-&+& h^2(a_2 + 3a_3a + 6a_4 a^2 + \cdots \nonumber \\
-&+& h^3(a_3 + 4a_4a + \cdots \nonumber 
-\end{eqnarray}
-\item 式\ref{eq:higherderivatives}の高次導関数を用いると
-\begin{eqnarray}
-f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
-&=& f(a) +  hf'(a) + \frac{h^2}{2!}f''(a) + \frac{h^3}{3!}f'''(a) + \cdots  \nonumber
-\end{eqnarray}
-$h=x-a$なのでテイラー展開(式\ref{eq:taylorseries})を得る。$a=0$ならマクローリン展開（式\ref{eq:macseries})である。
-\end{itemize}  
-\end{slide}
+%\begin{slide}{テイラー展開の導出}
+%\begin{itemize}
+%\item 与えられた関数が次のように多項式で近似できるとし、$a$を中心に$a_0, a_1, \cdots$を求める。
+%\begin{equation}
+%f(x) =  a_0 + a_1 x + a_2x^2 + a_3 x^3 + a_4x^4 +\cdots \label{eq:taylor}
+%\end{equation}
+%$x=a$では以下が成立。
+%\begin{equation}
+%f(a) =  a_0 + a_1 a + a_2a^2 + a_3 a^3 + a_4a^4 +\cdots  \nonumber 
+%\end{equation}
+%高次導関数は以下のように求められる。係数が次数に応じた階乗になることに注目。
+%\begin{eqnarray}
+%f'(x) &=& a_1 + 2a_2x+ 3a_3 x^2 + 4a_4x^3+\cdots \nonumber \\
+%f''(x) &=& 2a_2 + 6a_3 x + 12 a_4x^2 + \cdots \nonumber \\
+%f'''(x) &=& 6a_3 + 24 a_4 x + \cdots \nonumber \\
+%\vdots \label{eq:higherderivatives}
+%\end{eqnarray}
+%\end{itemize}
+%\end{slide}
+%\begin{slide}{テイラー展開の導出2}
+%\begin{itemize}
+%\item 式\ref{eq:taylor}に$x=a+h$を代入すると
+%\begin{eqnarray}
+%f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
+%&=& a_0 + a_1 a + a_2 a^2 + a_3 a^3 + a_4 a^4 + \cdots \nonumber \\
+%&+& h(a_1 + 2a_2a + 3a_3a^2 + 4a_4a^3 + \cdots \nonumber \\
+%&+& h^2(a_2 + 3a_3a + 6a_4 a^2 + \cdots \nonumber \\
+%&+& h^3(a_3 + 4a_4a + \cdots \nonumber 
+%\end{eqnarray}
+%\item 式\ref{eq:higherderivatives}の高次導関数を用いると
+%\begin{eqnarray}
+%f(a+h) &=& a_0 + a_1 (a+h) + a_2 (a+h)^2 + a_3 (a+h)^3 +  \cdots \nonumber \\
+%&=& f(a) +  hf'(a) + \frac{h^2}{2!}f''(a) + \frac{h^3}{3!}f'''(a) + \cdots  \nonumber
+%\end{eqnarray}
+%$h=x-a$なのでテイラー展開(式\ref{eq:taylorseries})を得る。$a=0$ならマクローリン展開（式\ref{eq:macseries})である。
+%\end{itemize}  
+%\end{slide}
 \begin{slide}{例題 5.2}
 次の関数をマクローリン展開を用いて三次式で近似せよ。
 \begin{itemize}
@@ -102,7 +98,7 @@ $h=x-a$なのでテイラー展開(式\ref{eq:taylorseries})を得る。$a=0$な
 \item $\sqrt{x+1}$
 \end{itemize}
 \end{slide}
-\begin{slide}{[3]テイラーの定理：参考}
+\begin{slide}{[3]テイラーの定理：証明}
 \begin{itemize}
 \item 関数$f(x)$が$C^{n+1}$級で区間$a \leqq x \leqq b$が$f(x)$の定義域に含まれていれば$h=b-a$として
 \begin{eqnarray}
@@ -117,7 +113,7 @@ g(x) =  f(x) +  \sum_{i=1}^n \frac{1}{i!}f^{(i)}(x) (b-x)^i  + K(b-x)^{n+1}   \n
 \end{equation}
 \end{itemize}
 \end{slide}
-\begin{slide}{[3]テイラーの定理:参考２}
+\begin{slide}{[3]テイラーの定理:証明２}
 \begin{itemize}
 \item $K$を次式が成立するように決定する。
 \begin{equation}
@@ -130,7 +126,7 @@ K = \frac{f(b) - f(a) - \sum_{i=1}^n \frac{1}{i!}f^{(i)}(a)(b-a)^i }{(b-a)^{n+1}
 $x=b$の時は式の定義により明らかに$g(b) = f(b)$である。
 \end{itemize}
 \end{slide}
-\begin{slide}{[3]テイラーの定理:参考３}
+\begin{slide}{[3]テイラーの定理:証明３}
 \begin{itemize}
 \item　このように$K$を決めることで$g(a)=g(b)=f(b)$なのでロールの定理（7回参照)により$g'(c)=0$となる$c$が$a<c<b$に少なくとも一つ存在する。
 \begin{eqnarray}
@@ -146,7 +142,7 @@ $x=b$の時は式の定義により明らかに$g(b) = f(b)$である。
 \end{eqnarray}
 \end{itemize}
 \end{slide}
-\begin{slide}{[3]テイラーの定理:参考４}
+\begin{slide}{[3]テイラーの定理:証明４}
 \begin{itemize}
 \item 総和の中は次のようにほとんど打消される。
 \begin{eqnarray}
@@ -160,7 +156,7 @@ $x=b$の時は式の定義により明らかに$g(b) = f(b)$である。
 \end{eqnarray}
 \end{itemize}
 \end{slide}
-\begin{slide}{[3]テイラーの定理:参考５}
+\begin{slide}{[3]テイラーの定理:証明5}
 \begin{itemize}
 \item 式\ref{eq:taylorsum}を用いて$g'(c)$を書き直すと
 \begin{equation}
@@ -628,11 +624,9 @@ $f(x) = \log(1+x)$の２次マクローリン級数と、６次マクローリ�
 
 \end{frame}
 \begin{slide}{課題 \#9}
-$f(x)=\cos(x)$の定義域を$-10 \le x \le 10$とし、二次までのマクローリン展開した場合、$\pm$1.5ラジアンを超えた付近から、下図のように近似精度が急速に劣化してしまう。級数の打ち切り次数を増やすことによって定義域$-10 \le x \le 10$全体で、近似できるか、できないか回答しなさい。もしで近似できると考える場合には、概ね何次まで級数展開すれば良好な近似が与えられるか図を用いるなどして説明せよ。
-
-\begin{figure}[h]
-\includegraphics[width=8cm]{calculus9/roccos.eps}
-\end{figure}
-
+\begin{equation}
+f(x) = \frac{x}{1 - ax} \nonumber 
+\end{equation}
+をマクローリン展開した場合の$x$の収束半径を求めよ。
 
 \end{slide}

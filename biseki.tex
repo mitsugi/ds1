@@ -279,7 +279,7 @@ f(a,b) = (y_o - a x_o-b)^2 + (y_1 - ax_1 - b)^2 + \cdots + (y_{14} - a x_{14} -b
 v = \frac{\Delta x}{\Delta t}
 \end{equation}
 であり、この$\Delta t$を限りなくゼロに近づけた時に収束する値が$x$の時間微分$\frac{dx}{dt}$である。つまり位置の時間微分は速度である。
-さらに速度の時間微分（位置の二階微分)$\frac{dv}{dt} = \frac{d^2x}{dt^2}$は加速度である。加速度に質量$m$を掛けると与える力$F$と等しいとするニュートンの運動方程式はよく知られている。
+さらに速度の時間微分（位置の二階微分)$\frac{dv}{dt} = \frac{d^2x}{dt^2}$は加速度である。加速度に質量$m$を掛けると与える力$F$と等しいとするニュートンの運動方程式（第２法則）はよく知られている。
 \begin{equation}
 m\frac{d^2x}{dt^2} = F
 \label{eq:newton}
@@ -303,10 +303,31 @@ x &=& \int_0^t \int_0^t F/m t  dt = \frac{1}{2} F/m t^2  + C_1t + C_0
 \end{eqnarray}
 
 \vspace{5mm}
-特別な問題を除けば、$F$が時間で変化する場合に、式の形で積分を表すことができない（定積分）。コンピュータを使って積分の近似値を求める手法（シミュレーション:simulation)が様々開発され、利用されている。
+特別な問題を除けば、$F$が時間で変化する場合には、式の形で積分を計算できない（定積分）。コンピュータを使って積分の近似値を求める手法（シミュレーション:simulation)が様々開発され、利用されている。
+
+\vspace{5mm}
+
+たとえば人工衛星の地球を中心とした二次元運動$(x, y)$を考える場合、重力は地球の質量$M$と、地球からの距離$r = \sqrt{x^2 + y^2}$に依存し、万有引力の法則(The law of universal gravity)を用いて、以下のように地球中心からの距離が変わると重力が変化するモデルとなる。
+\begin{equation}
+m(\frac{d^2 x}{dt^2}, \frac{d^2 y}{dt^2}) = F(x, y) = \frac{GMm}{r^3}(x, y)
+\label{eq:ge}
+\end{equation}
+ここで$G$は次の万有引力定数である。
+\begin{equation}
+G = 6.67 \times 10^{-11} m^3 s^{-2} kg^{-1}
+\end{equation}
+
+したがって$x$軸を鉛直とすると、地球上での運動方程式は、地球の半径$r_o$が約$6378$km, 地球の質量$M$=$5.97 \times 10^{24}$kgを代入して
+\begin{equation}
+m(\frac{d^2 x}{dt^2}, \frac{d^2 y}{dt^2})  =(-\frac{6.67 \times 10^{-11} 5.97 \times 10^{24}}{6378 \times 10^{6}}m, 0)\approx (-9.8m, 0)
+\end{equation}
+と良く知った形に導出できる。
 
 
-天気予報での雨雲の動きの予想や、飛沫飛散などのシミュレーションでは、本来時間的に連続している変数（たとえば位置$x$)を短い時間刻み($\Delta t$)間隔での離散値$x_i$でFig.~\ref{fig:discrete}のように折れ線近似できると考えて
+式\ref{eq:ge}を時間に関して二階積分できれば、人工衛星の位置$x,y$が時間の関数として表すことができるはずだが、式\ref{eq:ge}を数式として不定積分することは一般には困難である。
+
+
+そこで、本来時間的に連続している変数（たとえば位置$x$)を短い時間刻み($\Delta t$)間隔での離散値$x_i$でFig.~\ref{fig:discrete}のように折れ線近似できると考えて
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=\figSize\textwidth]{discrete.eps}
@@ -315,45 +336,89 @@ x &=& \int_0^t \int_0^t F/m t  dt = \frac{1}{2} F/m t^2  + C_1t + C_0
 \end{figure}
 時間$i\Delta t$における微分を離散値で例えば次のように近似する。この近似は本授業で学ぶテーラー展開(Taylor expansion), マクローリン展開（Maclaurin expansion)を用いているが、やり方は今の段階で理解できなくてよい。ここで$v_i$は時刻iにおける速度（位置の一階微分）、$a_i$は時刻iにおける加速度（位置の二階微分）である。
 \begin{eqnarray}
-v_i &=& \frac{dx}{dt}_i \approx \frac{x_{i} - x_{i-1}}{\Delta t} \\
-a_i &=& \frac{d^2 x}{dt^2}_i \approx \frac{x_{i} -2x_{i-1}+ x_{i-2}}{(\Delta t)^2} \label{eq:acc}
+v_i &=& \frac{dx}{dt}_i \approx \frac{x_{i+1} - x_{i}}{\Delta t} \\
+a_i &=& \frac{d^2 x}{dt^2}_i \approx \frac{x_{i+1} -2x_{i}+ x_{i-1}}{(\Delta t)^2} \label{eq:acc}
 \end{eqnarray} 
-Eq.~\ref{eq:acc}をEq.~\ref{eq:newton}に代入して、$F$が時間的に一定（たとえば重力$F=mg$, $g$は重力係数$9.8\mathrm{m^2/s}$）と考えると
-\begin{equation}
-m\frac{x_{i} -2x_{i-1}+ x_{i-2}}{(\Delta t)^2}   = F = mg
-\end{equation}
-となる。したがって過去の位置２つを使って未来の$x_i$を計算できる。つまり一般的には
-\begin{equation}
-x_i = g (\Delta t)^2 + 2x_{i-1} - x_{i-2}
-\end{equation}
-であり、書き下せば以下である。
+
+したがって現在、過去の位置２つ$x_i, x_{i-1}$を使った漸化式を運動方程式に当てはめる未来の$x_{i+1}$を計算できる。$y_i$も同様である。
+
+たとえば人工衛星が地上550kmの軌道にあるとして、$r_i = \sqrt{x_i^2+y_i^2}$とし、式\ref{eq:ge}を式\ref{eq:acc}を用いて離散値で表すと
 \begin{eqnarray}
-x_2 &=& g(\Delta t)^2 + 2x_1 - x_0 \\
-x_3 &=& g(\Delta t)^2 + 2x_2 - x_1 \\
-x_4 &=& g(\Delta t)^2 + 2x_3 - x_2 \label{eq:diff}\\
-\vdots
+(\frac{x_{i+1} -2x_{i}+ x_{i-1}}{(\Delta t)^2}) &=& \frac{GM}{r_i^3} x_i \\
+(\frac{y_{i+1} -2y_{i}+ y_{i-1}}{(\Delta t)^2}) &=& \frac{GM}{r_i^3} y_i \\
 \end{eqnarray}
-重力加速度を$-9.8~\mathrm{m/s^2}$（マイナスは落下方向)、微小時間$\Delta t = 0.1 \mathrm{sec.}$、$x_o=x_1=0$で計算した値と、理論値$x=\frac{1}{2}g t^2$を比較するとFig.\ref{fig:drop}となり、よく近似できることが示されている。
+式を変形すれば、未知数を左辺に置いた以下を得る。
+\begin{eqnarray}
+x_{i+1} &=& (\Delta t)^2\frac{GM}{r_i^3} x_i + 2x_i - x_{i-1} \\
+y_{i+1} &=&  (\Delta t)^2\frac{GM}{r_i^3} y_i + 2y_i - y_{i-1}\\
+\end{eqnarray}
+
+この式を初速を変えて$\Delta t = 10$秒で順次計算した結果が図\ref{fig:starlink}である。
 \begin{figure}[hbt]
 \centering
-\includegraphics[width=\figSize\textwidth]{drop.eps}
-\caption{差分方程式による自由落下シミュレーション}
-\label{fig:drop}
+\includegraphics[width=\textwidth]{starlink.eps}
+\caption{数値積分による人工衛星の軌道計算}
+\label{fig:starlink}
 \end{figure}
-さらに、同じプログラム\footnote{実際はエクセル}に$x_o=0, x_1=4$の初期値を与えることで、投げ上げて自由落下する運動のシミュレーションやこの初速度で無重力($g=0$)のシミュレーションを行うこともできる(Fig.~\ref{fig:drops}, Fig.~\ref{fig:drop3}). 
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=\figSize\textwidth]{drops.eps}
-\caption{差分方程式による初速度のある自由落下シミュレーション}
-\label{fig:drops}
-\end{figure}
-\begin{figure}[hbt]
-\centering
-\includegraphics[width=\figSize\textwidth]{drop3.eps}
-\caption{差分方程式による初速度ありで重力加速度がない場合のシミュレーション}
-\label{fig:drop3}
-\end{figure}
-このように微分を微小時間に分割して近似する方法を差分方程式(difference equation)と呼ぶ。
+初速度$7.5 km/s$の場合、ほぼ円軌道になり周回速度は約6000秒=1時間40分、それより早いと楕円軌道、それより遅いと、地球に墜落してしまう。
+この計算はstarlinkの衛星軌道にほぼ合致している。
+
+この数値積分プログラムは次のMATLABのmスクリプト47行で作成した。
+
+\begin{program}
+% gravity constant
+G = 6.67*power(10, -11); 
+% mass of the earch
+M = 5.97*power(10, 24); 
+% radius of the earth
+ro = 6378000; 
+% integration time step
+deltat = 10; 
+%figure; 
+axis([-50000 50000 -50000 50000]);
+drawcircle('Center', [0, 0], 'Radius', ro/1000, 'Color', 'black'); 
+a1 = animatedline('Color', 'blue', "lineWidth",  2, 'MaximumNumPoints',100);
+
+% initial values
+x = [550000+ro,  550000+ro]; 
+y = [0, deltat*7500]; 
+xxp = []; yyp=[]; 
+hold off; 
+
+an = annotation('textbox', [0.7, 0.8, 0.1, 0.1], "String",''); 
+an.LineStyle="none"; 
+for i=1:10000
+    % stop if the satellite falls in the earth
+    if (sqrt(x(2)*x(2)+y(2)*y(2)) < 1000000)
+        break;
+    end
+   ctime = i*deltat; 
+   % time stamp update
+   if (mod(i, 100) == 0)
+   an.String=string(ctime); 
+   end
+   % integration
+   xp = -deltat^2*G*M/power(sqrt(x(2)*x(2)+y(2)*y(2)), 3)*x(2) + 2*x(2) - x(1); 
+   yp = -deltat^2*G*M/power(sqrt(x(2)*x(2)+y(2)*y(2)), 3)*y(2) + 2*y(2) - y(1); 
+   addpoints(a1, xp/1000, yp/1000); 
+   xxp = [xxp xp/1000]; 
+   yyp = [yyp yp/1000];
+   x = [x(2) xp];
+   y = [y(2) yp];
+   pause(0.0001);
+   %clearpoints(a1);  
+   drawnow  limitrate; 
+end
+plot(xxp, yyp); 
+xlim([-50000 50000]);
+ylim([-50000 50000]); 
+drawcircle('Center', [0, 0], 'Radius', ro/1000, 'Color', 'black'); 
+\end{program}
+
+
+
+
+
 \clearpage
 
 %\section{積分}

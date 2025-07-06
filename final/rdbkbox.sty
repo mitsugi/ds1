@@ -1,0 +1,424 @@
+\makeatletter
+\newdimen\RoundedBreakboxCornerSize
+\newdimen\@rdbkbox@width
+\newdimen\@rdbkbox@bordersize
+\newdimen\@rdbkbox@prevheight
+\newdimen\@rdbkbox@lineskip
+\newbox\@rdbkbox@textbox
+\newbox\@rdbkbox@tempbox
+\newbox\@rdbkbox@topbox
+\newbox\@rdbkbox@bottombox
+\RoundedBreakboxCornerSize 10pt
+\def\roundedbreakbox{%
+   \@ifnextchar[\@roundedbreakbox{\@roundedbreakbox[\linewidth]}}
+\def\@roundedbreakbox[#1]{%
+   \ifhmode\par\fi
+   \hrule\@height\z@\@depth\z@
+   \@rdbkbox@width#1\relax
+   \dimen@\@rdbkbox@width
+   \advance\dimen@-.8\p@
+   \advance\dimen@-2\fboxsep
+   \setbox\@rdbkbox@textbox\vbox\bgroup
+      \hsize\dimen@
+      \@parboxrestore
+      \linewidth\dimen@
+      \@totalleftmargin\z@}
+\def\endroundedbreakbox{%
+   \ifhmode\par\fi
+   \egroup
+   \@endpetrue
+   \begingroup
+   \offinterlineskip
+   \vbadness\@M
+   \vfuzz\maxdimen
+   \splitmaxdepth\maxdimen
+   \@rdbkbox@set@topbox
+   \dimen@\ht\@rdbkbox@textbox
+   \advance\dimen@\dp\@rdbkbox@textbox
+   \ifdim\dimen@>\tw@\@rdbkbox@bordersize
+      \@rdbkbox@prevheight\z@
+      \@rdbkbox@split@box@loop
+      \global\setbox\@rdbkbox@tempbox\box\@tempboxa
+   \else
+      \global\setbox\@rdbkbox@tempbox\vbox{%
+         \box\@tempboxa
+         \hbox to\@rdbkbox@width{%
+            \kern.4\p@ \kern\fboxsep
+            \vbox to\tw@\@rdbkbox@bordersize{%
+               \vss
+               \unvbox\@rdbkbox@textbox
+               \vss}%
+            \hss}%
+         \box\@rdbkbox@bottombox}%
+   \fi
+   \endgroup
+   \medskip
+   \unvbox\@rdbkbox@tempbox
+   \medskip}
+\def\@rdbkbox@set@topbox{%
+   \dimen@\RoundedBreakboxCornerSize
+   \advance\dimen@\p@
+   \divide\dimen@\tw@
+   \divide\dimen@\p@
+   \count@\dimen@
+   \ifnum\count@<\@ne \count@\@ne \fi
+   \ifnum\count@>10   \count@10   \fi
+   \multiply\count@\tw@
+   \edef\@rdbkbox@cornersize{\the\count@}%
+   \dimen@\count@\p@
+   \multiply\count@\tw@
+   \advance\count@-4\relax
+   \@tempdima\@rdbkbox@width
+   \advance\@tempdima-\tw@\dimen@
+   \setbox\@tempboxa\vbox{%
+      \hbox to\@rdbkbox@width{%
+         \tencirc
+         \hbox to\z@{%
+            \advance\count@ 3\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}%
+         \kern\dimen@
+         \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+         \kern\dimen@
+         \hbox to\z@{%
+            \kern-.4\p@
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}}%
+      \kern-.4\p@
+      \ifdim\fboxsep<\dimen@
+         \kern\fboxsep
+      \else
+         \kern\dimen@
+         \@tempdimb\fboxsep
+         \advance\@tempdimb-\dimen@
+         \hbox to\@rdbkbox@width{%
+            \vrule\@height\@tempdimb\@depth\z@
+            \hfil
+            \vrule\@height\@tempdimb\@depth\z@}%
+      \fi}%
+   \setbox\@rdbkbox@bottombox\vbox{%
+      \kern-.4\p@
+      \ifdim\fboxsep<\dimen@
+         \kern\fboxsep
+      \else
+         \@tempdimb\fboxsep
+         \advance\@tempdimb-\dimen@
+         \hbox to\@rdbkbox@width{%
+            \vrule\@height\@tempdimb\@depth\z@
+            \hfil
+            \vrule\@height\@tempdimb\@depth\z@}%
+         \kern\dimen@
+      \fi
+      \hbox to\@rdbkbox@width{%
+         \tencirc
+         \hbox to\z@{%
+            \advance\count@ 2\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}%
+         \kern\dimen@
+         \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+         \kern\dimen@
+         \hbox to\z@{%
+            \kern-.4\p@
+            \advance\count@ 1\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}}}%
+   \ifdim\fboxsep<\dimen@
+      \@rdbkbox@bordersize-\fboxsep
+      \advance\@rdbkbox@bordersize\dimen@
+   \else
+      \@rdbkbox@bordersize\z@
+   \fi}
+\def\@rdbkbox@split@box@loop{%
+   \ifvoid\@rdbkbox@textbox\else
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \setbox\z@\vsplit\@rdbkbox@textbox to\z@
+      \setbox\z@\vbox{\unvbox\z@}%
+      \advance\dimen@-\ht\z@
+      \advance\dimen@-\dp\z@
+      \advance\dimen@-\ht\@rdbkbox@textbox
+      \advance\dimen@-\dp\@rdbkbox@textbox
+      \@rdbkbox@lineskip\dimen@
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \ifdim\dimen@>\@rdbkbox@bordersize
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize
+            \@tempdima\ht\z@
+            \advance\@tempdima\dp\z@
+            \advance\@tempdima\@rdbkbox@prevheight
+            \ifdim\@tempdima<\@rdbkbox@bordersize
+               \@rdbkbox@add@vrule\relax
+               \advance\@tempdima\@rdbkbox@lineskip
+            \else
+               \@tempdimb\@rdbkbox@prevheight
+               \advance\@tempdimb-\@rdbkbox@bordersize
+               \advance\@tempdimb\ht\z@
+               \@rdbkbox@add@vrule{\vrule\@width.4\p@\@height\@tempdimb}%
+            \fi
+            \@rdbkbox@prevheight\@tempdima
+         \else
+            \@rdbkbox@add@vrule{\vrule\@width.4\p@}%
+         \fi
+      \else
+         \advance\dimen@-\@rdbkbox@bordersize
+         \advance\dimen@\dp\z@
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize
+            \@tempdima\ht\z@
+            \advance\@tempdima-\@rdbkbox@bordersize
+            \advance\@tempdima\@rdbkbox@prevheight
+            \@rdbkbox@add@vrule{%
+               \vrule\@width.4\p@\@height\@tempdima\@depth\dimen@}%
+         \else
+            \@rdbkbox@add@vrule{\vrule\@width.4\p@\@depth\dimen@}%
+         \fi
+         \setbox\@tempboxa\vbox{%
+            \unvbox\@tempboxa
+            \unvbox\@rdbkbox@textbox
+            \box\@rdbkbox@bottombox}%
+      \fi
+      \expandafter\@rdbkbox@split@box@loop
+   \fi}
+\def\@rdbkbox@add@vrule#1{%
+   \setbox\@tempboxa\vbox{%
+      \unvbox\@tempboxa
+      \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize\else
+         \penalty\interlinepenalty
+      \fi
+      \hbox to\@rdbkbox@width{%
+         #1%
+         \kern\fboxsep
+         \box\z@
+         \hss
+         \kern\fboxsep
+         #1}%
+      \ifdim\@rdbkbox@lineskip>\z@
+         \nobreak
+         \hbox to\@rdbkbox@width{%
+            \vrule\@width.4\p@\@height\@rdbkbox@lineskip
+            \hfil
+            \vrule\@width.4\p@\@height\@rdbkbox@lineskip}%
+      \else
+         \kern\@rdbkbox@lineskip
+      \fi}}
+\makeatother
+\makeatletter
+\newdimen\RoundedBreakboxCornerSize
+\newdimen\@rdbkbox@width
+\newdimen\@rdbkbox@bordersize
+\newdimen\@rdbkbox@prevheight
+\newdimen\@rdbkbox@lineskip
+\newbox\@rdbkbox@textbox
+\newbox\@rdbkbox@tempbox
+\newbox\@rdbkbox@topbox
+\newbox\@rdbkbox@bottombox
+\RoundedBreakboxCornerSize 10pt
+\def\roundedbreakbox{%
+   \@ifnextchar[\@roundedbreakbox{\@roundedbreakbox[\linewidth]}}
+\def\@roundedbreakbox[#1]{%
+   \ifhmode\par\fi
+   \hrule\@height\z@\@depth\z@
+   \@rdbkbox@width#1\relax
+   \dimen@\@rdbkbox@width
+   \advance\dimen@-.8\p@
+   \advance\dimen@-2\fboxsep
+   \setbox\@rdbkbox@textbox\vbox\bgroup
+      \hsize\dimen@
+      \@parboxrestore
+      \linewidth\dimen@
+      \@totalleftmargin\z@}
+\def\endroundedbreakbox{%
+   \ifhmode\par\fi
+   \egroup
+   \@endpetrue
+   \begingroup
+   \offinterlineskip
+   \vbadness\@M
+   \vfuzz\maxdimen
+   \splitmaxdepth\maxdimen
+   \@rdbkbox@set@topbox
+   \dimen@\ht\@rdbkbox@textbox
+   \advance\dimen@\dp\@rdbkbox@textbox
+   \ifdim\dimen@>\tw@\@rdbkbox@bordersize
+      \@rdbkbox@prevheight\z@
+      \@rdbkbox@split@box@loop
+      \global\setbox\@rdbkbox@tempbox\box\@tempboxa
+   \else
+      \global\setbox\@rdbkbox@tempbox\vbox{%
+         \box\@tempboxa
+         \hbox to\@rdbkbox@width{%
+            \kern.4\p@ \kern\fboxsep
+            \vbox to\tw@\@rdbkbox@bordersize{%
+               \vss
+               \unvbox\@rdbkbox@textbox
+               \vss}%
+            \hss}%
+         \box\@rdbkbox@bottombox}%
+   \fi
+   \endgroup
+   \medskip
+   \unvbox\@rdbkbox@tempbox
+   \medskip}
+\def\@rdbkbox@set@topbox{%
+   \dimen@\RoundedBreakboxCornerSize
+   \advance\dimen@\p@
+   \divide\dimen@\tw@
+   \divide\dimen@\p@
+   \count@\dimen@
+   \ifnum\count@<\@ne \count@\@ne \fi
+   \ifnum\count@>10   \count@10   \fi
+   \multiply\count@\tw@
+   \edef\@rdbkbox@cornersize{\the\count@}%
+   \dimen@\count@\p@
+   \multiply\count@\tw@
+   \advance\count@-4\relax
+   \@tempdima\@rdbkbox@width
+   \advance\@tempdima-\tw@\dimen@
+   \setbox\@tempboxa\vbox{%
+      \hbox to\@rdbkbox@width{%
+         \tencirc
+         \hbox to\z@{%
+            \advance\count@ 3\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}%
+         \kern\dimen@
+         \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+         \kern\dimen@
+         \hbox to\z@{%
+            \kern-.4\p@
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}}%
+      \kern-.4\p@
+      \ifdim\fboxsep<\dimen@
+         \kern\fboxsep
+      \else
+         \kern\dimen@
+         \@tempdimb\fboxsep
+         \advance\@tempdimb-\dimen@
+         \hbox to\@rdbkbox@width{%
+            \vrule\@height\@tempdimb\@depth\z@
+            \hfil
+            \vrule\@height\@tempdimb\@depth\z@}%
+      \fi}%
+   \setbox\@rdbkbox@bottombox\vbox{%
+      \kern-.4\p@
+      \ifdim\fboxsep<\dimen@
+         \kern\fboxsep
+      \else
+         \@tempdimb\fboxsep
+         \advance\@tempdimb-\dimen@
+         \hbox to\@rdbkbox@width{%
+            \vrule\@height\@tempdimb\@depth\z@
+            \hfil
+            \vrule\@height\@tempdimb\@depth\z@}%
+         \kern\dimen@
+      \fi
+      \hbox to\@rdbkbox@width{%
+         \tencirc
+         \hbox to\z@{%
+            \advance\count@ 2\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}%
+         \kern\dimen@
+         \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+         \kern\dimen@
+         \hbox to\z@{%
+            \kern-.4\p@
+            \advance\count@ 1\relax
+            \setbox\z@\hbox{\char\count@}%
+            \ht\z@\z@ \dp\z@\z@
+            \box\z@
+            \hss}}}%
+   \ifdim\fboxsep<\dimen@
+      \@rdbkbox@bordersize-\fboxsep
+      \advance\@rdbkbox@bordersize\dimen@
+   \else
+      \@rdbkbox@bordersize\z@
+   \fi}
+\def\@rdbkbox@split@box@loop{%
+   \ifvoid\@rdbkbox@textbox\else
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \setbox\z@\vsplit\@rdbkbox@textbox to\z@
+      \setbox\z@\vbox{\unvbox\z@}%
+      \advance\dimen@-\ht\z@
+      \advance\dimen@-\dp\z@
+      \advance\dimen@-\ht\@rdbkbox@textbox
+      \advance\dimen@-\dp\@rdbkbox@textbox
+      \@rdbkbox@lineskip\dimen@
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \ifdim\dimen@>\@rdbkbox@bordersize
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize
+            \@tempdima\ht\z@
+            \advance\@tempdima\dp\z@
+            \advance\@tempdima\@rdbkbox@prevheight
+            \ifdim\@tempdima<\@rdbkbox@bordersize
+               \@rdbkbox@add@vrule\relax
+               \advance\@tempdima\@rdbkbox@lineskip
+            \else
+               \@tempdimb\@rdbkbox@prevheight
+               \advance\@tempdimb-\@rdbkbox@bordersize
+               \advance\@tempdimb\ht\z@
+               \@rdbkbox@add@vrule{\vrule\@width.4\p@\@height\@tempdimb}%
+            \fi
+            \@rdbkbox@prevheight\@tempdima
+         \else
+            \@rdbkbox@add@vrule{\vrule\@width.4\p@}%
+         \fi
+      \else
+         \advance\dimen@-\@rdbkbox@bordersize
+         \advance\dimen@\dp\z@
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize
+            \@tempdima\ht\z@
+            \advance\@tempdima-\@rdbkbox@bordersize
+            \advance\@tempdima\@rdbkbox@prevheight
+            \@rdbkbox@add@vrule{%
+               \vrule\@width.4\p@\@height\@tempdima\@depth\dimen@}%
+         \else
+            \@rdbkbox@add@vrule{\vrule\@width.4\p@\@depth\dimen@}%
+         \fi
+         \setbox\@tempboxa\vbox{%
+            \unvbox\@tempboxa
+            \unvbox\@rdbkbox@textbox
+            \box\@rdbkbox@bottombox}%
+      \fi
+      \expandafter\@rdbkbox@split@box@loop
+   \fi}
+\def\@rdbkbox@add@vrule#1{%
+   \setbox\@tempboxa\vbox{%
+      \unvbox\@tempboxa
+      \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize\else
+         \penalty\interlinepenalty
+      \fi
+      \hbox to\@rdbkbox@width{%
+         #1%
+         \kern\fboxsep
+         \box\z@
+         \hss
+         \kern\fboxsep
+         #1}%
+      \ifdim\@rdbkbox@lineskip>\z@
+         \nobreak
+         \hbox to\@rdbkbox@width{%
+            \vrule\@width.4\p@\@height\@rdbkbox@lineskip
+            \hfil
+            \vrule\@width.4\p@\@height\@rdbkbox@lineskip}%
+      \else
+         \kern\@rdbkbox@lineskip
+      \fi}}
+\makeatother
